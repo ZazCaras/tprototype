@@ -1,0 +1,37 @@
+services:
+  api:
+    image: tprototype:latest
+    build:
+      context: . 
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    networks:
+      - apis-network
+
+  db:  
+    image: mongo:latest
+    container_name: news_db
+    ports:
+      - "27017:27017"
+    expose:
+      - 27017
+    env_file:
+      - .env
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - apis-network
+
+volumes:
+  mongo-data:
+
+networks:
+  apis-network:
+    driver: bridge

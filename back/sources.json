@@ -1,0 +1,50 @@
+[
+    {
+        "link": "https://elpais.com/america/",
+        "name": "El País",
+        "home_tag": "h2",
+        "title_tag": "h1",
+        "title_class": "a_t",
+        "content_tag": "h2",
+        "content_class": "a_st"
+    },
+    {
+        "link": "https://www.bbc.com/mundo",
+        "name": "BBC Mundo",
+        "home_tag": "h3",
+        "title_tag": "h1",
+        "title_class": "bbc-14gqcmb e1p3vdyi0",
+        "content_tag": "p",
+        "content_class": "bbc-hhl7in e17g058b0"
+    },
+    {
+        "link": "https://www.elmundo.es/",
+        "name": "El Mundo",
+        "home_tag": "header",
+        "home_class": "ue-c-cover-content__headline-group",
+        "title_tag": "h1",
+        "title_class": "ue-c-article__headline js-headline",
+        "content_tag": "p",
+        "content_class": "ue-c-article__paragraph"
+    },
+    {
+        "link": "https://cnnespanol.cnn.com/",
+        "name": "CNN Español",
+        "home_tag": "h2",
+        "home_class": "news__title",
+        "title_tag": "h1",
+        "title_class": "storyfull__title",
+        "content_tag": "p",
+        "content_class": ""
+    },
+    {
+        "link": "https://www.prensalibre.com/internacional/",
+        "name": "CNN Español",
+        "home_tag": "h2",
+        "home_class": "news__title",
+        "title_tag": "h1",
+        "title_class": "storyfull__title",
+        "content_tag": "p",
+        "content_class": ""
+    }
+]

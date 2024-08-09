@@ -12,3 +12,9 @@ client = MongoClient(
     f"mongodb://{MONGO_INITDB_ROOT_USERNAME}:{MONGO_INITDB_ROOT_PASSWORD}@{MONGO_HOSTNAME}:{MONGO_PORT}/"
 )
 db = client[MONGO_INITDB_DATABASE]
+
+try:
+    client.admin.command('ismaster')
+    print("MongoDB connection successful")
+except Exception as e:
+    print(f"Error connecting to MongoDB: {e}")
