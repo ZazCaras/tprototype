@@ -1,7 +1,5 @@
 <script>
-	import BookAnimation from '../components/BookAnimation.svelte';
 	import brain from '$lib/images/BrainNoBg.png';
-
 </script>
 
 <svelte:head>
@@ -10,11 +8,10 @@
 </svelte:head>
 
 <section>
-	<img src={brain} alt="App Logo" />
-	<BookAnimation/>
+	<img src={brain} alt="App Logo" class="bounce-in" />
 </section>
 
-<style lang="postcss">
+<style>
 	section {
 		display: flex;
 		flex-direction: column;
@@ -22,24 +19,23 @@
 		align-items: center;
 		flex: 0.6;
 	}
-
-	h1 {
-		width: 100%;
+	.bounce-in {
+		animation: bounce-in 2s ease forwards;
 	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
+	@keyframes bounce-in {
+		0% {
+			opacity: 0;
+			transform: scale(0.3);
+		}
+		50% {
+			opacity: 1;
+			transform: scale(1.05);
+		}
+		70% {
+			transform: scale(0.9);
+		}
+		100% {
+			transform: scale(1);
+		}
 	}
 </style>

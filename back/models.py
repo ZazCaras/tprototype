@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Literal
 
 class NewsSource(BaseModel):
     link: str
@@ -8,3 +9,6 @@ class NewsSource(BaseModel):
     title_class: str
     content_tag: str
     content_class: str
+
+class Sentiment(BaseModel):
+    sentiment: Literal["positive", "neutral", "negative"]

@@ -6,7 +6,7 @@ from models import NewsSource
 from datetime import date
 
 
-router = APIRouter(prefix="/scraping", tags=["scraping"])
+router = APIRouter(prefix="/scraping", tags=["Web Scraping"])
 
 news_collection = db.news
 source_collection = db.sources
@@ -49,7 +49,7 @@ def new_source(source: NewsSource):
 def webscrapping():
     getter = requests.get("https://elpais.com/america/")
     soup = BeautifulSoup(getter.content, "html.parser")
-
+    print(soup)
     article_urls = []
     for a in soup.find_all("h2"):
         try:
@@ -76,7 +76,7 @@ def webscrapping():
         except:
             pass
     news_collection.insert_one(
-        {"website": "El País", "articles": articles, "time": str(date.today())}
+        {"website": "El País", "articles": articles, "time": str(date.today()), "sentiment": None}
     )
     return {"website": "El País", "articles": articles}
 
@@ -111,7 +111,7 @@ def webscrapping():
         except:
             pass
     news_collection.insert_one(
-        {"website": "BBC Mundo", "articles": articles, "time": str(date.today())}
+        {"website": "BBC Mundo", "articles": articles, "time": str(date.today()), "sentiment": None}
     )
     return {"website": "BBC Mundo", "articles": articles}
 
@@ -145,7 +145,7 @@ def webscrapping():
             
             print({"url": url, "title": article_title, "content": article_content})
             articles.append(
-                {"url": url, "title": article_title.strip(), "content": article_content.strip()}
+                {"url": url, "title": article_title.strip(), "content": article_content.strip(), "sentiment": None}
             )
         except:
             pass
@@ -181,7 +181,7 @@ def webscrapping():
             ).text
             print({"url": url, "title": article_title, "content": article_content})
             articles.append(
-                {"url": url, "title": article_title.strip(), "content": article_content.strip()}
+                {"url": url, "title": article_title.strip(), "content": article_content.strip(), "sentiment": None}
             )
         except:
             pass
@@ -189,3 +189,77 @@ def webscrapping():
         {"website": "El Mundo", "articles": articles, "time": str(date.today())}
     )
     return {"website": "El Mundo", "articles": articles}
+
+
+@router.get("/nbcnews") #   WORKS
+def webscrapping():
+    getter = requests.get("https://www.nbcnews.com/world")
+    soup = BeautifulSoup(getter.content, "html.parser")
+    article_urls = []
+    for a in soup.find_all("h2"):
+        try:
+            hr = a.find("a", href=True)
+            article_urls.append(hr["href"])
+        except: pass
+    articles = []
+    for url in article_urls:
+        article_getter = requests.get(url)
+        article_soup = BeautifulSoup(article_getter.content, "html.parser")
+        if len(articles) == 10:
+            break
+        try:
+            article_title = article_soup.find(
+                "h1"
+            ).text
+            article_content = article_soup.find(
+                "div", {"data-testid": "article-dek"}
+            ).text
+            # print({"url": url, "title": article_title, "content": article_content})
+            articles.append(
+                {"url": url, "title": article_title.strip(), "content": article_content.strip()}
+            )
+            news_collection.insert_one({
+                "website": "NBC News", "title": article_title.strip(), "content": article_content.strip(), "date": str(date.today()), "sentiment": None
+            })
+        except:
+            pass
+
+    return {"website": "NBC News", "articles": articles}
+
+
+@router.get("/cnn_news") #  WORKS
+def webscrapping():
+    getter = requests.get("https://edition.cnn.com/world")
+    soup = BeautifulSoup(getter.content, "html.parser")
+    article_urls = []
+    for a in soup.find_all("div", {"data-created-updated-by": "true"}):
+        try:
+            hr = a.find("a", href=True)
+            article_urls.append("https://edition.cnn.com" + hr["href"])
+        except: pass
+        
+    print(article_urls)
+    articles = []
+    for url in article_urls:
+        article_getter = requests.get(url)
+        article_soup = BeautifulSoup(article_getter.content, "html.parser")
+        if len(articles) == 10:
+            break
+        try:
+            article_title = article_soup.find(
+                "h1"
+            ).text
+            article_content = article_soup.find(
+                "div", {"itemprop": "caption"}
+            ).text
+            # print({"url": url, "title": article_title, "content": article_content})
+            articles.append(
+                {"url": url, "title": article_title.strip(), "content": article_content.strip()}
+            )
+            news_collection.insert_one({
+                "website": "CNN News", "title": article_title.strip(), "content": article_content.strip(), "date": str(date.today()), "sentiment": None
+            })
+        except:
+            pass
+
+    return {"website": "CNN News", "articles": articles}

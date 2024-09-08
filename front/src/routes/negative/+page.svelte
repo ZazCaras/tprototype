@@ -1,11 +1,10 @@
 <script>
-	import { onMount } from 'svelte';
-	import axios from 'axios';
+	import { AiFillSmile } from 'svelte-icons-pack/ai';
 
 	let news = [
 		{
 			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
-			source: 'CNN',
+			source: 'CNN English',
 			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister',
 			content:
 				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
@@ -26,55 +25,71 @@
 			content:
 				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
 			sentiment: 'Negative'
-		},{
+		},
+		{
+			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
+			source: 'CNN',
+			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister Paetongtarn Paetongtarn Paetongtarn PaetongtarnPaetongtarn Paetongtarn PaetongtarnPaetongtarn',
+			content:
+				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
+			sentiment: 'Negative'
+		}, 		{
+			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
+			source: 'CNN English',
+			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister',
+			content:
+				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
+			sentiment: 'Negative'
+		},
+		{
 			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
 			source: 'CNN',
 			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister',
 			content:
 				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
+			sentiment: 'Negative'
+		},
+		{
+			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
+			source: 'CNN',
+			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister',
+			content:
+				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
+			sentiment: 'Negative'
+		},
+		{
+			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
+			source: 'CNN',
+			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister Paetongtarn Paetongtarn Paetongtarn PaetongtarnPaetongtarn Paetongtarn PaetongtarnPaetongtarn',
+			content:
+				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
 			sentiment: 'Negative'
 		}
 	];
-	let error = null;
-
-	onMount(async () => {
-		try {
-			const res = await axios.get(`route`);
-			news = res.data;
-		} catch (e) {
-			error = e;
-		}
-	});
 </script>
 
 <svelte:head>
 	<title>Negative News</title>
-	<meta name="description" content="Positive News :)" />
+	<meta name="description" content="Negative News" />
 </svelte:head>
 
 <div>
-	<h1>Negative News >:(</h1>
+	<h1>Negative News</h1>
 </div>
 <div class="container">
 	{#each news as n, i}
-		<div class="card">
-			<div><h2>{n.source}</h2></div>
-			<div class="card__content">
-				<p class="card__title">{n.title}</p>
-				<p class="card__description">
-					{n.content}
-				</p>
-			</div>
-		</div>
+		<a class="card emotion" href="#">
+			<div class="overlay"></div>
+			<p class="news_title">{n.title}</p>
+			<p class="news_content">{n.content}</p>
+			<p class="news_source">{n.source}</p>
+		</a>
 	{/each}
 </div>
 
 <style>
 	h1 {
-		color: white;
-	}
-	h2 {
-		color: black;
+		color: #fe065d;
 	}
 	.container {
 		max-width: 1200px;
@@ -96,60 +111,139 @@
 		}
 	}
 
-	/* From Uiverse.io by gharsh11032000 */
+	.emotion {
+		--bg-color: radial-gradient(circle, rgba(207,0,72,1) 28%, rgba(255,59,128,1) 75%, rgba(204,0,72,1) 100%);
+		--text-color-hover: #000000;
+		--box-shadow-color: rgba(207,0,72, 0.48);
+	}
+
 	.card {
-		position: relative;
 		width: 300px;
-		min-height: 300px;
-		max-height: 350px;
-		background: linear-gradient(-45deg, #a60002 0%, #ff0f7b 100%);
-		border-radius: 10px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		height: 330px;
+		background: black;
+		border-top-right-radius: 10px;
 		overflow: hidden;
-		transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+		display: flex;
+		flex-direction: column;
+		justify-content: end;
+		align-items: center;
+		position: relative;
+		box-shadow: 0 14px 26px rgba(0, 0, 0, 0.04);
+		transition: all 0.3s ease-out;
+		text-decoration: none;
 	}
 
 	.card:hover {
-		transform: scale(1.1);
-		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+		transform: translateY(-5px) scale(1.005) translateZ(0);
+		box-shadow:
+			0 24px 36px rgba(0, 0, 0, 0.11),
+			0 24px 46px var(--box-shadow-color);
 	}
 
-	.card__content {
+	.overlay {
+		width: 130px;
 		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 100%;
-		height: 300px;
-		padding: 20px;
-		box-sizing: border-box;
-		background-color: #fff;
+		height: 130px;
+		border-radius: 50%;
+		background: var(--bg-color);
+		left: 85px;
+		bottom: 85px;
+		z-index: 1;
+		transition: transform 0.3s ease-out;
+	}
+
+	.card:hover .overlay {
+		transform: scale(4) translateZ(0);
+	}
+
+	.card:active {
+		transform: scale(1) translateZ(0);
+		box-shadow:
+			0 15px 24px rgba(0, 0, 0, 0.11),
+			0 15px 24px var(--box-shadow-color);
+	}
+
+	.news_title {
+		font-size: 17px;
+		color: #ff3b80;
+		z-index: 1;
+		transition: color 0.3s ease-out;
+		position: absolute;
+		text-align: center;
+		max-height: 70px;
+		overflow-y: auto
+	}
+	.card:hover .news_title {
+		color: #000000;
+		position: relative;
+		animation: sourceY-up 1s;
+		animation-iteration-count: 1;
+		animation-fill-mode: forwards;
+		max-height: 70px;
+		overflow-y: auto;
+	}
+
+	.news_content {
 		opacity: 0;
-		transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+		position: absolute;
+		z-index: 1;
 	}
 
-	.card:hover .card__content {
-		transform: translate(-50%, -50%) rotate(0deg);
-		opacity: 1;
-	}
-
-	.card__title {
-		margin: 0;
-		font-size: 18px;
-		color: #333;
-		font-weight: 700;
-		min-height: 100px;
-		overflow: auto;
-	}
-
-	.card__description {
-		margin: 10px 0 0;
+	.card:hover .news_content {
+		color: var(--text-color-hover);
+		display: inline-block;
+		position: absolute;
+		height: 170px;
+		margin-bottom: 55px;
+		overflow-y: auto;
+		display: flex;
+		align-content: start;
+		text-align: center;
 		font-size: 12px;
-		color: #777;
-		line-height: 1.4;
-		height: 150px;
-		overflow: auto;
+		padding: 10px 20px 10px 20px;
+		animation: appear 2s ease forwards;
+	}
+
+	.news_source {
+		font-size: 17px;
+		color: #000000;
+		z-index: 1;
+		transition: color 0.3s ease-out;
+		position: absolute;
+		margin-bottom: 135px;
+		max-height: 50px;
+	}
+
+	.card:hover .news_source {
+		color: var(--text-color-hover);
+		position: relative;
+		animation: sourceY-down 0.5s;
+		animation-iteration-count: 1;
+		animation-fill-mode: forwards;
+		max-height: 50px;
+
+	}
+
+	@keyframes sourceY-up {
+		from {
+			transform: translateY(165px);
+		}
+		to {
+			transform: translateY(-65px);
+		}
+	}
+	@keyframes sourceY-down {
+		from {
+			transform: translateY(0px);
+		}
+		to {
+			transform: translateY(120px);
+		}
+	}
+
+	@keyframes appear {
+		to {
+			opacity: 1
+		}	
 	}
 </style>
