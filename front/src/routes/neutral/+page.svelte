@@ -1,71 +1,32 @@
 <script>
-	import { AiFillSmile } from 'svelte-icons-pack/ai';
+	import { onMount } from 'svelte';
+	import axios from 'axios';
+	import { Icon } from 'svelte-icons-pack';
+	import { FaFaceGrin } from 'svelte-icons-pack/fa';
+	import { FaFaceMeh } from 'svelte-icons-pack/fa';
+	import { FaFaceFrownOpen } from 'svelte-icons-pack/fa';
 
-	let news = [
-		{
-			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
-			source: 'CNN English',
-			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister',
-			content:
-				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
-			sentiment: 'Negative'
-		},
-		{
-			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
-			source: 'CNN',
-			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister',
-			content:
-				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
-			sentiment: 'Negative'
-		},
-		{
-			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
-			source: 'CNN',
-			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister',
-			content:
-				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
-			sentiment: 'Negative'
-		},
-		{
-			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
-			source: 'CNN',
-			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister Paetongtarn Paetongtarn Paetongtarn PaetongtarnPaetongtarn Paetongtarn PaetongtarnPaetongtarn',
-			content:
-				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
-			sentiment: 'Negative'
-		}, 		{
-			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
-			source: 'CNN English',
-			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister',
-			content:
-				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
-			sentiment: 'Negative'
-		},
-		{
-			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
-			source: 'CNN',
-			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister',
-			content:
-				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
-			sentiment: 'Negative'
-		},
-		{
-			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
-			source: 'CNN',
-			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister',
-			content:
-				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
-			sentiment: 'Negative'
-		},
-		{
-			url: 'https://edition.cnn.com/2024/08/18/asia/thailand-king-paetongtarn-shinawatra-intl-hnk/index.html',
-			source: 'CNN',
-			title: 'Thailand’s king endorses Paetongtarn Shinawatra as new prime minister Paetongtarn Paetongtarn Paetongtarn PaetongtarnPaetongtarn Paetongtarn PaetongtarnPaetongtarn',
-			content:
-				' Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.  Paetongtarn Shinawatra, a scion of Thailand’s most famed and divisive political dynasty, won the endorsement of the king on Sunday to officially become the country’s new prime minister.',
-			sentiment: 'Negative'
+	let news = [];
+	onMount(async () => {
+		try {
+			const res = await axios.get(`http://localhost:8000/news/all/neutral`);
+			console.log(res.data);
+			news = res.data.news;
+		} catch (err) {
+			console.log(err);
 		}
-	];
+	});
+
+	const changeSentiment = async (id, sentiment) => {
+		try {
+			const res = await axios.put(`http://localhost:8000/news/change/${id}`, {sentiment: sentiment});
+			console.log(res.data)
+			news = res.data.news;
+		} catch (err) {
+			console.log(err);
+		}
+	}
+	
 </script>
 
 <svelte:head>
@@ -78,12 +39,20 @@
 </div>
 <div class="container">
 	{#each news as n, i}
-		<a class="card emotion" href="#">
+		<div class="card emotion">
 			<div class="overlay"></div>
 			<p class="news_title">{n.title}</p>
 			<p class="news_content">{n.content}</p>
-			<p class="news_source">{n.source}</p>
-		</a>
+			<a class="news_source" href={`/${n.source}`}>{n.website}</a>
+			<div class="dropup">
+				<button class="dropbtn"><Icon src={FaFaceGrin} /></button>
+				<div class="dropup-content">
+					<a href="#" on:click={() => changeSentiment(n.id, "positive")}><Icon src={FaFaceGrin} color="#00FA56" /></a>
+					<a href="#" on:click={() => changeSentiment(n.id, "neutral")}><Icon src={FaFaceMeh} color="#F0CCA8" /></a>
+					<a href="#" on:click={() => changeSentiment(n.id, "negative")}><Icon src={FaFaceFrownOpen} color="#E2253D" /></a>
+				</div>
+			</div>
+		</div>
 	{/each}
 </div>
 
@@ -112,9 +81,14 @@
 	}
 
 	.emotion {
-		--bg-color: radial-gradient(circle, rgba(145,108,91,1) 28%, rgba(254,227,190,1) 75%, rgba(145,108,91,1) 100%);
+		--bg-color: radial-gradient(
+			circle,
+			rgba(145, 108, 91, 1) 28%,
+			rgba(254, 227, 190, 1) 75%,
+			rgba(145, 108, 91, 1) 100%
+		);
 		--text-color-hover: #000000;
-		--box-shadow-color: rgba(254,227,190, 0.48);
+		--box-shadow-color: rgba(254, 227, 190, 0.48);
 	}
 
 	.card {
@@ -147,7 +121,7 @@
 		border-radius: 50%;
 		background: var(--bg-color);
 		left: 85px;
-		bottom: 85px;
+		bottom: 105px;
 		z-index: 1;
 		transition: transform 0.3s ease-out;
 	}
@@ -171,7 +145,11 @@
 		position: absolute;
 		text-align: center;
 		max-height: 70px;
-		overflow-y: auto
+		overflow-y: auto;
+		display: flex;
+		align-items: start;
+		align-content: center;
+		padding: 0px 10px 10px 10px;
 	}
 	.card:hover .news_title {
 		color: #000000;
@@ -179,7 +157,6 @@
 		animation: sourceY-up 1s;
 		animation-iteration-count: 1;
 		animation-fill-mode: forwards;
-		max-height: 70px;
 		overflow-y: auto;
 	}
 
@@ -210,7 +187,7 @@
 		z-index: 1;
 		transition: color 0.3s ease-out;
 		position: absolute;
-		margin-bottom: 135px;
+		margin-bottom: 160px;
 		max-height: 50px;
 	}
 
@@ -221,7 +198,6 @@
 		animation-iteration-count: 1;
 		animation-fill-mode: forwards;
 		max-height: 50px;
-
 	}
 
 	@keyframes sourceY-up {
@@ -229,7 +205,7 @@
 			transform: translateY(165px);
 		}
 		to {
-			transform: translateY(-65px);
+			transform: translateY(-50px);
 		}
 	}
 	@keyframes sourceY-down {
@@ -237,13 +213,59 @@
 			transform: translateY(0px);
 		}
 		to {
-			transform: translateY(120px);
+			transform: translateY(140px);
 		}
 	}
 
 	@keyframes appear {
 		to {
-			opacity: 1
-		}	
+			opacity: 1;
+		}
+	}
+
+	.dropup {
+		position: absolute;
+		bottom: 15px;
+		right: 15px;
+		z-index: 1;
+		opacity: 0;
+	}
+
+	.card:hover .dropup {
+		opacity: 0.8;
+	}
+
+	.dropbtn {
+		background-color: #000000;
+		color: #00fa56;
+		padding: 10px;
+		font-size: 16px;
+		border: none;
+		border-radius: 10px;
+	}
+
+	.dropup-content {
+		display: none;
+		position: absolute;
+		background-color: black;
+		bottom: 39px;
+		z-index: 1;
+		border-radius: 10px;
+	}
+
+	.dropup-content a {
+		color: black;
+		padding: 12px 10px;
+		text-decoration: none;
+		display: block;
+		border-radius: 10px;
+	}
+
+	.dropup-content a:hover {
+		background-color: rgb(95, 95, 95);
+	}
+
+	.dropup:hover .dropup-content {
+		display: block;
 	}
 </style>

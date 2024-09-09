@@ -203,11 +203,12 @@ def webscrapping():
         except: pass
     articles = []
     for url in article_urls:
-        article_getter = requests.get(url)
-        article_soup = BeautifulSoup(article_getter.content, "html.parser")
-        if len(articles) == 10:
-            break
         try:
+            article_getter = requests.get(url)
+            article_soup = BeautifulSoup(article_getter.content, "html.parser")
+            if len(articles) == 100:
+                break
+       
             article_title = article_soup.find(
                 "h1"
             ).text
@@ -241,18 +242,18 @@ def webscrapping():
     print(article_urls)
     articles = []
     for url in article_urls:
-        article_getter = requests.get(url)
-        article_soup = BeautifulSoup(article_getter.content, "html.parser")
-        if len(articles) == 10:
-            break
         try:
+            article_getter = requests.get(url)
+            article_soup = BeautifulSoup(article_getter.content, "html.parser")
+            if len(articles) == 100:
+                break
+            
             article_title = article_soup.find(
                 "h1"
             ).text
             article_content = article_soup.find(
                 "div", {"itemprop": "caption"}
             ).text
-            # print({"url": url, "title": article_title, "content": article_content})
             articles.append(
                 {"url": url, "title": article_title.strip(), "content": article_content.strip()}
             )

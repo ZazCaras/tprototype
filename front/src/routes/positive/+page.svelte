@@ -5,19 +5,28 @@
 	import { FaFaceGrin } from 'svelte-icons-pack/fa';
 	import { FaFaceMeh } from 'svelte-icons-pack/fa';
 	import { FaFaceFrownOpen } from 'svelte-icons-pack/fa';
-	
-	let news = []
+
+	let news = [];
 	onMount(async () => {
 		try {
-			const res = await axios.get(`http://localhost:8000/news/no_sentiment`);
-			console.log(res.data)
-			news = res.data.news
+			const res = await axios.get(`http://localhost:8000/news/all/positive`);
+			console.log(res.data);
+			news = res.data.news;
 		} catch (err) {
 			console.log(err);
 		}
-	});
+	})
 
-	
+	const changeSentiment = async (id, sentiment) => {
+		try {
+			const res = await axios.put(`http://localhost:8000/news/change/${id}`, {sentiment: sentiment});
+			console.log(res.data)
+			news = res.data.news;
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
 </script>
 
 <svelte:head>
@@ -34,13 +43,13 @@
 			<div class="overlay"></div>
 			<p class="news_title">{n.title}</p>
 			<p class="news_content">{n.content}</p>
-			<a class="news_source" href={`/${n.source}`}>{n.source}</a>
+			<a class="news_source" href={`/${n.source}`}>{n.website}</a>
 			<div class="dropup">
 				<button class="dropbtn"><Icon src={FaFaceGrin} /></button>
 				<div class="dropup-content">
-					<a href="#"><Icon src={FaFaceGrin} color="#00FA56" /></a>
-					<a href="#"><Icon src={FaFaceMeh} color="#F0CCA8" /></a>
-					<a href="#"><Icon src={FaFaceFrownOpen} color="#E2253D" /></a>
+					<a href="#" on:click={() => changeSentiment(n.id, "positive")}><Icon src={FaFaceGrin} color="#00FA56" /></a>
+					<a href="#" on:click={() => changeSentiment(n.id, "neutral")}><Icon src={FaFaceMeh} color="#F0CCA8" /></a>
+					<a href="#" on:click={() => changeSentiment(n.id, "negative")}><Icon src={FaFaceFrownOpen} color="#E2253D" /></a>
 				</div>
 			</div>
 		</div>
@@ -112,7 +121,7 @@
 		border-radius: 50%;
 		background: var(--bg-color);
 		left: 85px;
-		bottom: 85px;
+		bottom: 105px;
 		z-index: 1;
 		transition: transform 0.3s ease-out;
 	}
@@ -140,7 +149,7 @@
 		display: flex;
 		align-items: start;
 		align-content: center;
-		margin-bottom:10px;
+		padding: 0px 10px 10px 10px;
 	}
 	.card:hover .news_title {
 		color: #000000;
@@ -148,7 +157,6 @@
 		animation: sourceY-up 1s;
 		animation-iteration-count: 1;
 		animation-fill-mode: forwards;
-		max-height: 70px;
 		overflow-y: auto;
 	}
 
@@ -179,7 +187,7 @@
 		z-index: 1;
 		transition: color 0.3s ease-out;
 		position: absolute;
-		margin-bottom: 135px;
+		margin-bottom: 160px;
 		max-height: 50px;
 	}
 
@@ -192,22 +200,12 @@
 		max-height: 50px;
 	}
 
-	.sentiment_button {
-		opacity: 0;
-		z-index: 1;
-		position: absolute;
-		bottom: 10px;
-		right: 10px;
-		width: 40px;
-		height: 40px;
-	}
-
 	@keyframes sourceY-up {
 		from {
 			transform: translateY(165px);
 		}
 		to {
-			transform: translateY(-65px);
+			transform: translateY(-50px);
 		}
 	}
 	@keyframes sourceY-down {
@@ -215,7 +213,7 @@
 			transform: translateY(0px);
 		}
 		to {
-			transform: translateY(120px);
+			transform: translateY(140px);
 		}
 	}
 
@@ -269,11 +267,5 @@
 
 	.dropup:hover .dropup-content {
 		display: block;
-	}
-
-	.center {
-		display: flex;
-		align-content: center;
-		align-items: center;
 	}
 </style>
