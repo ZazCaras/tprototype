@@ -1,0 +1,21 @@
+@startuml "PROTOTIPO DE APLICACIÓN DE ANÁLISIS DE SENTIMIENTOS EN NOTICIAS OBTENIDAS POR WEB SCRAPING"
+[User Interface] - "User Input"
+
+node "APIs" {
+  [Web Scraping Endpoints] - [Neural Network Categorization]
+  [UI Endpoints] --> [User Interface]
+}
+
+
+cloud "News Websites (CNN, NBC, etc.)" {
+}
+
+"News Websites (CNN, NBC, etc.)" <-- [Web Scraping Endpoints]
+
+database "News DB" {
+}
+
+"News DB" <--> [UI Endpoints]
+"News DB" <--> [Web Scraping Endpoints]
+"News DB" <--> [Neural Network Categorization]
+@enduml
