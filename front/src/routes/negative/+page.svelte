@@ -43,7 +43,7 @@
 			<div class="overlay"></div>
 			<p class="news_title">{n.title}</p>
 			<p class="news_content">{n.content}</p>
-			<a class="news_source" href={`/${n.source}`}>{n.website}</a>
+			<a class="news_source" href={`${n.url}`}>{n.website}</a>
 			<div class="dropup">
 				<button class="dropbtn"><Icon src={FaFaceGrin} /></button>
 				<div class="dropup-content">

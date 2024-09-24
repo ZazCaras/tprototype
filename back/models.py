@@ -12,3 +12,4 @@ class NewsSource(BaseModel):
 
 class Sentiment(BaseModel):
     sentiment: Literal["positive", "neutral", "negative"]
+    score: float

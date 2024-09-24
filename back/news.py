@@ -43,11 +43,12 @@ def sentiment_change(newsId: str, data: Sentiment):
         },
         {
             "$set": {
-                "sentiment": data.sentiment
+                "sentiment": data.sentiment,
+                "score": data.score
             }
         }
     )
-    return news_by_sentiment(data.sentiment)
+    return news_by_sentiment(data.sentiment)            
 
 
 @router.get("/fetch_and_categorize/{sentiment}")
@@ -62,10 +63,10 @@ def fetch_and_categorize(sentiment: Literal["positive", "neutral", "negative"]):
         
         for i, e in enumerate(scores):
             emotion = "neutral"
-            if e < 0.25:
+            if e < 0.45:
                 emotion = "negative"
             elif e > 0.80:
                 emotion = "positive"
-            sentiment_change(not_categorized[i]["id"], Sentiment(sentiment=emotion))
+            sentiment_change(not_categorized[i]["id"], Sentiment(sentiment=emotion, score=e))
     
     return news_by_sentiment(sentiment)

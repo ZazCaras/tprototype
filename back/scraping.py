@@ -215,12 +215,11 @@ def webscrapping():
             article_content = article_soup.find(
                 "div", {"data-testid": "article-dek"}
             ).text
-            # print({"url": url, "title": article_title, "content": article_content})
             articles.append(
                 {"url": url, "title": article_title.strip(), "content": article_content.strip()}
             )
             news_collection.insert_one({
-                "website": "NBC News", "title": article_title.strip(), "content": article_content.strip(), "date": str(date.today()), "sentiment": None
+                "website": "NBC News", "title": article_title.strip(), "content": article_content.strip(), "date": str(date.today()), "sentiment": None, "url": url
             })
         except:
             pass
@@ -239,7 +238,6 @@ def webscrapping():
             article_urls.append("https://edition.cnn.com" + hr["href"])
         except: pass
         
-    print(article_urls)
     articles = []
     for url in article_urls:
         try:
@@ -258,7 +256,7 @@ def webscrapping():
                 {"url": url, "title": article_title.strip(), "content": article_content.strip()}
             )
             news_collection.insert_one({
-                "website": "CNN News", "title": article_title.strip(), "content": article_content.strip(), "date": str(date.today()), "sentiment": None
+                "website": "CNN News", "title": article_title.strip(), "content": article_content.strip(), "date": str(date.today()), "sentiment": None, "url": url
             })
         except:
             pass
